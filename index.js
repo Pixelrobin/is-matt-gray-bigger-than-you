@@ -1,3 +1,5 @@
+console.log( process.env );
+
 const
 	Twit    = require( "twit" ),
 	T       = new Twit({
