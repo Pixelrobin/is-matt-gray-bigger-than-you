@@ -1,7 +1,11 @@
 const
 	Twit    = require( "twit" ),
-	secrets = require( "./secrets.js" ),
-	T       = new Twit( secrets );
+	T       = new Twit({
+		consumer_key: process.env.CONSUMER_KEY,
+		consumer_secret: process.env.CONSUMER_SECRET,
+		access_token: process.env.ACCESS_TOKEN,
+		access_token_secret: process.env.ACCESS_TOKEN_SECRET
+	});
 
 const stream = T.stream('statuses/filter', { track: '@namedculprit' });
 
@@ -28,7 +32,7 @@ function reply( answer, id, handle ) {
 	});
 }
 
-stream.on('tweet', function (tweet) {
+stream.on('tweet', function ( tweet ) {
 	if ( tweet ) {
 		const text = tweet.text.replace( / /g, "" ).toLowerCase();
 
@@ -41,7 +45,7 @@ stream.on('tweet', function (tweet) {
 
 			reply(
 				size < MattGraySize ? "yes." : "no.",
-				user.id,
+				tweet.id,
 				user.screen_name
 			);
 		}
