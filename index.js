@@ -7,7 +7,7 @@ const
 		access_token_secret: process.env.ACCESS_TOKEN_SECRET
 	});
 
-const stream = T.stream('statuses/filter', { track: '@unnamedculprit' });
+const stream = T.stream('statuses/filter', { track: process.env.VICTIM });
 
 var MattGraySize = 0;
 
