@@ -46,12 +46,12 @@ stream.on( "tweet", function ( tweet ) {
 			user = tweet.user,
 			text = tweet.text.replace( / /g, "" ).toLowerCase();
 		
-		console.log( user.id_str );
+		console.log( `Tweet from ${ user }: ${ tweet.text }` );
 		
 		// For some reason, I can't get id_str to work with this?
 		// I guess screen_name will do for now.
 		if ( user.screen_name != "namedculprit" ) {
-			if ( text.substr( "ismattgraybiggerthanme" ) !== -1 ) {
+			if ( text.search( "ismattgraybiggerthanme" ) !== -1 ) {
 				const
 					size = user.followers_count,
 					mentions = tweet.entities.user_mentions;
