@@ -30,7 +30,7 @@ function reply( answer, id, handles ) {
 	for ( handle of handles ) status += `@${ handle } `
 	
 	const data = {
-		status: status + `${ answer } ${ Math.random() }`,
+		status: status + `${ answer }`,
 		in_reply_to_status_id: id
 	}
 
