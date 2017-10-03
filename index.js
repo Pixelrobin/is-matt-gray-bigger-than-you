@@ -46,27 +46,31 @@ stream.on( "tweet", function ( tweet ) {
 			user = tweet.user,
 			text = tweet.text.replace( / /g, "" ).toLowerCase();
 		
-		console.log( `Tweet from ${ user }: ${ tweet.text }` );
+		console.log( `Tweet from ${ user.screen_name }: ${ tweet.text }` );
 		
 		// For some reason, I can't get id_str to work with this?
 		// I guess screen_name will do for now.
 		if ( user.screen_name != "namedculprit" ) {
-			if ( text.search( "ismattgraybiggerthanme" ) !== -1 ) {
-				const
-					size = user.followers_count,
-					mentions = tweet.entities.user_mentions;
-				
-				let handles = [ user.screen_name ];
+			if ( user.screen_name === "unnamedculprit" ) {
+				reply ( "[insert clever response here]", tweet.id_str, handles );
+			} else {
+				if ( text.search( "ismattgraybiggerthanme" ) !== -1 ) {
+					const
+						size = user.followers_count,
+						mentions = tweet.entities.user_mentions;
+					
+					let handles = [ user.screen_name ];
 
-				if ( mentions )
-					for ( mention of mentions )
-						handles.push( mention.screen_name );
-				
-				reply (
-					size < MattGraySize ? "yes." : "no.",
-					tweet.id_str,
-					handles
-				);
+					if ( mentions )
+						for ( mention of mentions )
+							handles.push( mention.screen_name );
+					
+					reply (
+						size < MattGraySize ? "yes." : "no.",
+						tweet.id_str,
+						handles
+					);
+				}
 			}
 		}
 	}
